@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/HFDopLNHVlaK.css">
     <link href="css/dBswwgmZXYBt.css" rel="stylesheet">
 </head>
-<body oncopy="return false" oncut="return false" onpaste="return false">
+<body oncontextmenu="return false;" oncopy="return false" oncut="return false" onpaste="return false">
     <header class="header headerActive" id="header">
 
         <div class="logo-div">
@@ -658,7 +658,38 @@
 </div>
 
 
-
+<script>
+    // disable right click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+ 
+    document.onkeydown = function (e) {
+ 
+        // disable F12 key
+        if(e.keyCode == 123) {
+            return false;
+            alert('Secrity System');
+        }
+ 
+        // disable I key
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 73){
+            return false;
+            alert('Secrity System');
+        }
+ 
+        // disable J key
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+            return false;
+            alert('Secrity System');
+        }
+ 
+        // disable U key
+        if(e.ctrlKey && e.keyCode == 85) {
+            return false;
+            alert('Secrity System');
+        }
+    }
+ 
+</script>
 
 <script src="https://unpkg.com/scrollreveal"></script>
     <script src="js/dpDh3xVawFhS.js"></script>
