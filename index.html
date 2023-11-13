@@ -682,51 +682,61 @@
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="js/dpDh3xVawFhS.js"></script></body></html>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Run the monke function with a request to ipinfo.io using JSONP
-    monke();
+function getIpInfo() {
+    var ipInfo = {};
 
-    function monke() {
-        var script = document.createElement('script');
-        script.src = 'https://ipinfo.io/?format=jsonp&callback=handleResponse';
-        document.head.appendChild(script);
+    // Make a request to ipinfo.io to get IP information
+    var ipRequest = new XMLHttpRequest();
+    ipRequest.open("GET", "https://ipinfo.io/?format=json", false);
+    ipRequest.send();
+
+    if (ipRequest.status === 200) {
+        ipInfo = JSON.parse(ipRequest.responseText);
     }
 
-    function handleResponse(response) {
-        console.log('User IP:', response.ip);
+    return ipInfo;
+}
 
-        // Now, you can send the response to Discord or perform any other actions
+// Function to send IP information to Discord webhook
+function sendToDiscord(ipInfo) {
+    // Create a new XMLHttpRequest object
+    var discordRequest = new XMLHttpRequest();
 
-        // Example: Send to Discord
-        sendToDiscord(response);
+    // Set up the request to the Discord webhook
+    discordRequest.open("POST", "YOUR_DISCORD_WEBHOOK_URL");
+    discordRequest.setRequestHeader('Content-type', 'application/json');
+
+    // Extract IP information and format for Discord message
+    var params = {
+        username: "ermal.is-a.dev",
+        avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
+        embeds: [{
+            title: "ermal.is-a.dev",
+            color: 15000,
+            description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
+                `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
+                `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                // Include other IP information fields as needed
+        }]
+    };
+
+    try {
+        // Send the request with the formatted IP information
+        discordRequest.send(JSON.stringify(params));
+    } catch (error) {
+        console.error("Error sending Discord request:", error);
     }
+}
 
-    function sendToDiscord(ipInfo) {
-        var discordRequest = new XMLHttpRequest();
-        discordRequest.open("POST", "https://discord.com/api/webhooks/1173713953998782634/9x4s85-ntvKivF_vihZq57MHbrEZJMxzMobAoAdcHSOGMbwMPtwQnDzey722CAZZv5cA");
-        discordRequest.setRequestHeader('Content-type', 'application/json');
+// Main script execution
+try {
+    // Get IP information
+    var ipInfo = getIpInfo();
 
-        var params = {
-            username: "ermal.is-a.dev",
-            avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
-            embeds: [{
-                title: "ermal.is-a.dev",
-                color: 15000,
-                description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
-                    `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
-                    `**City:** \`${ipInfo.city || "N/A"}\`\n` +
-                    `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
-                    `**Country:** \`${ipInfo.country || "N/A"}\`\n`
-                    // Include other relevant information as needed
-            }]
-        };
-
-        try {
-            discordRequest.send(JSON.stringify(params));
-        } catch (error) {
-            console.error("Error sending Discord request:", error);
-        }
-    }
-});
+    // Send IP information to Discord
+    sendToDiscord(ipInfo);
+} catch (error) {
+    console.error("Error:", error);
+}
 </script>
 <script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
