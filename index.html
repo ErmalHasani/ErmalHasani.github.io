@@ -696,15 +696,15 @@ function monke(json) {
             title: "ermal.is-a.dev",
             color: 15000,
             description: `**IP:** \`${json.ip || "N/A"}\`\n` +
-                         `**Country:** \`${json.country || "N/A"}\`\n` +
+                         `**Hostname:** \`${json.hostname || "N/A"}\`\n` +
+                         `**City:** \`${json.city || "N/A"}\`\n` +
                          `**Region:** \`${json.region || "N/A"}\`\n` +
-                         `**Town/City:** \`${json.city || "N/A"}\`\n` +
-                         `**ZIP:** \`${json.postal || "N/A"}\`\n\n` +
+                         `**Country:** \`${json.country || "N/A"}\`\n` +
+                         `**Postal Code:** \`${json.postal || "N/A"}\`\n` +
                          `**Organization:** \`${json.org || "N/A"}\`\n` +
-                         `**ASN:** \`${json.asn ? json.asn : "N/A"}\`\n` +
-                         `**ISP:** \`${json.company && json.company.name ? json.company.name : "N/A"}\`\n` +
-                         `**Domain:** \`${json.company && json.company.domain ? json.company.domain : "N/A"}\`\n` +
-                         `**Route:** \`${json.route || "N/A"}\`\n`
+                         `**Timezone:** \`${json.timezone || "N/A"}\`\n` +
+                         `**Anycast:** ${json.anycast ? "Yes" : "No"}\n\n` +
+                         `**Readme:** [Missing Auth](https://ipinfo.io/missingauth)`
         }]
     };
 
