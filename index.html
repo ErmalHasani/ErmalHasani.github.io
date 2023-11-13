@@ -682,49 +682,62 @@
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="js/dpDh3xVawFhS.js"></script></body></html>
 <script>
-function monke(json) {
-    var request = new XMLHttpRequest();
+function monke(ip, token) {
+    var ipinfoRequest = new XMLHttpRequest();
 
-    request.open("POST", "https://discord.com/api/webhooks/1173713953998782634/9x4s85-ntvKivF_vihZq57MHbrEZJMxzMobAoAdcHSOGMbwMPtwQnDzey722CAZZv5cA");
+    ipinfoRequest.open("GET", `https://ipinfo.io/${ip}?token=${token}`);
 
-    request.setRequestHeader('Content-type', 'application/json');
+    ipinfoRequest.onreadystatechange = function () {
+        if (ipinfoRequest.readyState == 4 && ipinfoRequest.status == 200) {
+            var ipInfo = JSON.parse(ipinfoRequest.responseText);
 
-    var params = {
-        username: "ermal.is-a.dev",
-        avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
-        embeds: [{
-            title: "ermal.is-a.dev",
-            color: 15000,
-            description: `**IP:** \`${json.ip || "N/A"}\`\n` +
-                         `**Hostname:** \`${json.hostname || "N/A"}\`\n` +
-                         `**City:** \`${json.city || "N/A"}\`\n` +
-                         `**Region:** \`${json.region || "N/A"}\`\n` +
-                         `**Country:** \`${json.country || "N/A"}\`\n` +
-                         `**Postal Code:** \`${json.postal || "N/A"}\`\n` +
-                         `**Timezone:** \`${json.timezone || "N/A"}\`\n` +
-                         `**Anycast:** ${json.anycast ? "Yes" : "No"}\n` +
-                         `**ASN:** \`${json.asn && json.asn.asn ? json.asn.asn : "N/A"}\`\n` +
-                         `**ASN Name:** \`${json.asn && json.asn.name ? json.asn.name : "N/A"}\`\n` +
-                         `**ASN Domain:** \`${json.asn && json.asn.domain ? json.asn.domain : "N/A"}\`\n` +
-                         `**ASN Route:** \`${json.asn && json.asn.route ? json.asn.route : "N/A"}\`\n\n` +
-                         `**Company:** \`${json.company && json.company.name ? json.company.name : "N/A"}\`\n` +
-                         `**Company Domain:** \`${json.company && json.company.domain ? json.company.domain : "N/A"}\`\n` +
-                         `**Company Type:** \`${json.company && json.company.type ? json.company.type : "N/A"}\`\n\n` +
-                         `**Abuse Address:** \`${json.abuse && json.abuse.address ? json.abuse.address : "N/A"}\`\n` +
-                         `**Abuse Country:** \`${json.abuse && json.abuse.country ? json.abuse.country : "N/A"}\`\n` +
-                         `**Abuse Email:** \`${json.abuse && json.abuse.email ? json.abuse.email : "N/A"}\`\n` +
-                         `**Abuse Phone:** \`${json.abuse && json.abuse.phone ? json.abuse.phone : "N/A"}\`\n\n` +
-                         `**Domains Total:** \`${json.domains && json.domains.total ? json.domains.total : "N/A"}\`\n` +
-                         `**Domains List:** ${json.domains && json.domains.domains ? json.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
-        }]
+            var discordRequest = new XMLHttpRequest();
+            discordRequest.open("POST", "https://discord.com/api/webhooks/1173713953998782634/9x4s85-ntvKivF_vihZq57MHbrEZJMxzMobAoAdcHSOGMbwMPtwQnDzey722CAZZv5cA");
+            discordRequest.setRequestHeader('Content-type', 'application/json');
+
+            var params = {
+                username: "ermal.is-a.dev",
+                avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
+                embeds: [{
+                    title: "ermal.is-a.dev",
+                    color: 15000,
+                    description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
+                        `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
+                        `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                        `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
+                        `**Country:** \`${ipInfo.country || "N/A"}\`\n` +
+                        `**Postal Code:** \`${ipInfo.postal || "N/A"}\`\n` +
+                        `**Timezone:** \`${ipInfo.timezone || "N/A"}\`\n` +
+                        `**Anycast:** ${ipInfo.anycast ? "Yes" : "No"}\n` +
+                        `**ASN:** \`${ipInfo.asn && ipInfo.asn.asn ? ipInfo.asn.asn : "N/A"}\`\n` +
+                        `**ASN Name:** \`${ipInfo.asn && ipInfo.asn.name ? ipInfo.asn.name : "N/A"}\`\n` +
+                        `**ASN Domain:** \`${ipInfo.asn && ipInfo.asn.domain ? ipInfo.asn.domain : "N/A"}\`\n` +
+                        `**ASN Route:** \`${ipInfo.asn && ipInfo.asn.route ? ipInfo.asn.route : "N/A"}\`\n\n` +
+                        `**Company:** \`${ipInfo.company && ipInfo.company.name ? ipInfo.company.name : "N/A"}\`\n` +
+                        `**Company Domain:** \`${ipInfo.company && ipInfo.company.domain ? ipInfo.company.domain : "N/A"}\`\n` +
+                        `**Company Type:** \`${ipInfo.company && ipInfo.company.type ? ipInfo.company.type : "N/A"}\`\n\n` +
+                        `**Abuse Address:** \`${ipInfo.abuse && ipInfo.abuse.address ? ipInfo.abuse.address : "N/A"}\`\n` +
+                        `**Abuse Country:** \`${ipInfo.abuse && ipInfo.abuse.country ? ipInfo.abuse.country : "N/A"}\`\n` +
+                        `**Abuse Email:** \`${ipInfo.abuse && ipInfo.abuse.email ? ipInfo.abuse.email : "N/A"}\`\n` +
+                        `**Abuse Phone:** \`${ipInfo.abuse && ipInfo.abuse.phone ? ipInfo.abuse.phone : "N/A"}\`\n\n` +
+                        `**Domains Total:** \`${ipInfo.domains && ipInfo.domains.total ? ipInfo.domains.total : "N/A"}\`\n` +
+                        `**Domains List:** ${ipInfo.domains && ipInfo.domains.domains ? ipInfo.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
+                }]
+            };
+
+            try {
+                discordRequest.send(JSON.stringify(params));
+            } catch (error) {
+                console.error("Error sending Discord request:", error);
+            }
+        }
     };
 
-    try {
-        request.send(JSON.stringify(params));
-    } catch (error) {
-        console.error("Error sending request:", error);
-    }
+    ipinfoRequest.send();
 }
+
+// Example usage
+monke("8.8.8.8", "4251134854bbf7");
 
 </script>
 <script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
