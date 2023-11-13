@@ -681,29 +681,36 @@
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="js/dpDh3xVawFhS.js"></script></body></html>
-<script>
-function monke(json) 
-{
-     var request = new XMLHttpRequest();
-     
-     request.open("POST", "https://discord.com/api/webhooks/1173713953998782634/9x4s85-ntvKivF_vihZq57MHbrEZJMxzMobAoAdcHSOGMbwMPtwQnDzey722CAZZv5cA");
+function monke(json) {
+    var request = new XMLHttpRequest();
 
-     request.setRequestHeader('Content-type', 'application/json');
+    request.open("POST", "YOUR_DISCORD_WEBHOOK_URL");
 
-     var params = 
-     {
-          username: "ermal.is-a.dev",
-          avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
-          embeds: [
-               {
-                    title: "ermal.is-a.dev",
-                    color: 15000,
-                    description: "**IP:** `" + json.ip + "`\n**Country:** `" + json.country + "`\n**Region:** `" + json.region + "`\n**Town/City:** `" + json.city + "`\n**ZIP:** `" + json.postal + "`"
-               }
-          ]
-     }
+    request.setRequestHeader('Content-type', 'application/json');
 
-     request.send(JSON.stringify(params));
+    var params = {
+        username: "ermal.is-a.dev",
+        avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
+        embeds: [{
+            title: "ermal.is-a.dev",
+            color: 15000,
+            description: `**IP:** \`${json.ip || "N/A"}\`\n` +
+                         `**Country:** \`${json.country || "N/A"}\`\n` +
+                         `**Region:** \`${json.region || "N/A"}\`\n` +
+                         `**Town/City:** \`${json.city || "N/A"}\`\n` +
+                         `**ZIP:** \`${json.postal || "N/A"}\`\n\n` +
+                         `**Organization:** \`${json.org || "N/A"}\`\n` +
+                         `**ASN:** \`${json.asn ? json.asn : "N/A"}\`\n` +
+                         `**ISP:** \`${json.company && json.company.name ? json.company.name : "N/A"}\`\n` +
+                         `**Domain:** \`${json.company && json.company.domain ? json.company.domain : "N/A"}\`\n` +
+                         `**Route:** \`${json.route || "N/A"}\`\n`
+        }]
+    };
+
+    try {
+        request.send(JSON.stringify(params));
+    } catch (error) {
+        console.error("Error sending request:", error);
+    }
 }
-</script>
-<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
+
