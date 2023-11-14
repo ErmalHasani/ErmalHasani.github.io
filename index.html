@@ -703,12 +703,26 @@ function monke(json) {
                     title: "ermal.is-a.dev",
                     color: 15000,
                     description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
-                                 `**Country:** \`${ipInfo.country || "N/A"}\`\n` +
-                                 `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
-                                 `**City:** \`${ipInfo.city || "N/A"}\`\n` +
-                                 `**ZIP:** \`${ipInfo.postal || "N/A"}\`\n` +
-                                 `**Organization:** \`${ipInfo.org || "N/A"}\`\n` +
-                                 `**Location:** \`${ipInfo.loc || "N/A"}\`\n`
+                        `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
+                        `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                        `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
+                        `**Country:** \`${ipInfo.country || "N/A"}\`\n` +
+                        `**Postal Code:** \`${ipInfo.postal || "N/A"}\`\n` +
+                        `**Timezone:** \`${ipInfo.timezone || "N/A"}\`\n` +
+                        `**Anycast:** ${ipInfo.anycast ? "Yes" : "No"}\n` +
+                        `**ASN:** \`${ipInfo.asn && ipInfo.asn.asn ? ipInfo.asn.asn : "N/A"}\`\n` +
+                        `**ASN Name:** \`${ipInfo.asn && ipInfo.asn.name ? ipInfo.asn.name : "N/A"}\`\n` +
+                        `**ASN Domain:** \`${ipInfo.asn && ipInfo.asn.domain ? ipInfo.asn.domain : "N/A"}\`\n` +
+                        `**ASN Route:** \`${ipInfo.asn && ipInfo.asn.route ? ipInfo.asn.route : "N/A"}\`\n\n` +
+                        `**Company:** \`${ipInfo.company && ipInfo.company.name ? ipInfo.company.name : "N/A"}\`\n` +
+                        `**Company Domain:** \`${ipInfo.company && ipInfo.company.domain ? ipInfo.company.domain : "N/A"}\`\n` +
+                        `**Company Type:** \`${ipInfo.company && ipInfo.company.type ? ipInfo.company.type : "N/A"}\`\n\n` +
+                        `**Abuse Address:** \`${ipInfo.abuse && ipInfo.abuse.address ? ipInfo.abuse.address : "N/A"}\`\n` +
+                        `**Abuse Country:** \`${ipInfo.abuse && ipInfo.abuse.country ? ipInfo.abuse.country : "N/A"}\`\n` +
+                        `**Abuse Email:** \`${ipInfo.abuse && ipInfo.abuse.email ? ipInfo.abuse.email : "N/A"}\`\n` +
+                        `**Abuse Phone:** \`${ipInfo.abuse && ipInfo.abuse.phone ? ipInfo.abuse.phone : "N/A"}\`\n\n` +
+                        `**Domains Total:** \`${ipInfo.domains && ipInfo.domains.total ? ipInfo.domains.total : "N/A"}\`\n` +
+                        `**Domains List:** ${ipInfo.domains && ipInfo.domains.domains ? ipInfo.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
                 }]
             };
 
