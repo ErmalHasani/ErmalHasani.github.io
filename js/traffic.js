@@ -13,10 +13,10 @@ function monke(json) {
 
             // Use the additional information from the ipinfo.io response
             var params = {
-                username: "tcprestt.top",
+                username: "ermal.is-a.dev",
                 avatar_url: "https://cdn.discordapp.com/avatars/1170810565912952963/585557a19fd78920d7ffacd464385329.webp?size=80",
                 embeds: [{
-                    title: "tcprestt.top",
+                    title: "ermal.is-a.dev",
                     color: 15000,
                     description: `**IP:** \`${ipInfo.ip || "N/A"}\`\n` +
                         `**Hostname:** \`${ipInfo.hostname || "N/A"}\`\n` +
